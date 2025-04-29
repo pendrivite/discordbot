@@ -4,6 +4,10 @@ import asyncio
 from commands import setup_commands  # Import funkcji z pliku commands.py
 from flask import Flask
 from threading import Thread
+from dotenv import load_dotenv
+import os
+load_dotenv()
+token = os.getenv('DISCORD_TOKEN')
 
 # Flask serwer
 app = Flask('')
@@ -38,8 +42,7 @@ setup_commands(bot)
 # Uruchomienie bota
 async def main():
     try:
-        keep_alive()
-        await bot.start('MTM2NjQ3MDE0MDYwMTk2MjY4Nw.G-BhiR.rv_FtAXw-4kc5Nz4qkqeXrKvYAB8qQbNd4yHMU')  # Wstaw token bota
+        await bot.start(token)  # Wstaw token bota
     except Exception as e:
         print(f'Błąd: {e}')
         await bot.close()
